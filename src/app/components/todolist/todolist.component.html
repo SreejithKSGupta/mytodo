@@ -1,34 +1,43 @@
 <div id="todolist">
   <div id="pendinglist">
-
-@for (todo of notdonetodolist; track $index) {
-  <mat-card appearance="outlined" class="todoitem">
-    <mat-checkbox class="tododone"></mat-checkbox>
-    <div class="todoval">{{ todo.val }}</div>
-    <div class="enddate">
-      {{ todo.enddate }}
-    </div>
-    <div class="priority">
-      {{ todo.priority }}
-    </div>
-  </mat-card>
-}
-</div>
-
-  <div id="donelist">
-    @for (todo of donetodolist; track $index) {
-
+    <h2>Pending</h2>
+    @for (todo of notdonetodolist; track todo.id) {
     <mat-card appearance="outlined" class="todoitem">
-      <mat-checkbox class="tododone"></mat-checkbox>
+      <div
+      class="priority"
+      [ngStyle]="{ 'background-color': prioritycolor[todo.priority] }"
+    >
+    </div>
       <div class="todoval">{{ todo.val }}</div>
       <div class="enddate">
-        {{ todo.enddate.day }}
+        {{ todo.enddate | date : "shortDate" }}
       </div>
-      <div class="priority" >
-        hello
-      </div>
+      <mat-icon class="mat-18" (click)="deletetodo(todo)">delete</mat-icon>
+      <mat-icon class="tododone" (click)="checkitem(todo)">task_alt</mat-icon>
     </mat-card>
-  }
-</div>
+    }
+  </div>
 
+  <div id="donelist">
+    <h2>Completed</h2>
+    @for (todo of donetodolist; track todo.id) {
+
+    <mat-card appearance="outlined" class="todoitem">
+    <div
+      class="priority"
+      [ngStyle]="{ 'background-color': prioritycolor[todo.priority] }"
+    >
+    </div>
+
+      <div class="todoval">{{ todo.val }}</div>
+      <div class="enddate">
+        {{ todo.enddate | date : "shortDate" }}
+      </div>
+      <mat-icon class="mat-18" (click)="deletetodo(todo)">delete</mat-icon>
+      <mat-icon class="tododone mat-18" (click)="checkitem(todo)"
+        >undo</mat-icon
+      >
+    </mat-card>
+    }
+  </div>
 </div>

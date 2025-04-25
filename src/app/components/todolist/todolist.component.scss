@@ -6,7 +6,7 @@
 
 #donelist, #pendinglist{
   width: 50%;
-  height: 56vh;
+  height: 70vh;
   overflow: scroll;
   display: flex;
   flex-direction: column;
@@ -15,25 +15,34 @@
 
 .todoitem{
   display: flex;
-  margin: 10px;
+  margin: 5px;
   flex-direction: row;
   justify-content: space-between;
-  padding: 5px 5px;
+  padding: 3px;
   width: 80%;
   color: black;
+  align-items: center;
+  transition-duration: 500ms;
+  animation-duration: 500ms;
+}
+
+.tododone{
+  padding: 1px;
 }
 
 .todoval{
   text-align: left;
+  width: 60%;
   overflow:hidden;
 }
 
 .enddate{
-  width: 20%;
+  width: 15%;
 }
 
 .priority{
-  width: 20px;
-  height: 20px;
+  width: 5%;
+  aspect-ratio: 1/1;
   border-radius: 50%;
+  background-color: rgba(255, 0, 0, 0.651);
 }

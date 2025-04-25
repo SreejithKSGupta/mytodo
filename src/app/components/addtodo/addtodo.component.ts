@@ -8,6 +8,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import { TodomanagerService } from '../../services/todomanager.service';
+import { Todomodal } from '../../modals';
 
 @Component({
   selector: 'app-addtodo',
@@ -19,23 +20,22 @@ import { TodomanagerService } from '../../services/todomanager.service';
 })
 export class AddtodoComponent {
   todoText = '';
-  todoendDate=Date.now().toLocaleString;
-  todopriority ='low';
+  todoendDate=new Date();
+  todopriority:'low'|'med'|'high' ='low';
    constructor(private todoservice: TodomanagerService){
 
   }
 
 
   addtodo(){
-    console.log("adding todo", this.todoText, this.todoendDate, this.todopriority)
-    let newtodo = {
+    let newtodo:Todomodal = {
+      id:new Date(),
       val: this.todoText,
-      date: Date.now().toString(),
+      date: new Date(),
       enddate:this.todoendDate,
       done:false,
       priority:this.todopriority
     }
-    console.log(newtodo);
     this.todoservice.addtodo(newtodo);
   }
 }

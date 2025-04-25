@@ -1,22 +1,43 @@
-import { Injectable, signal } from '@angular/core';
+import {  Injectable, signal, effect } from '@angular/core';
+import { Todomodal } from '../modals';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodomanagerService {
-  public todolist = signal<string[]>([]);
-  constructor() {
+  public todolist = signal<Todomodal[]>([]);
+
+
+  readitem(todo: Todomodal) {
+    const updatedList = this.todolist().map(item =>
+      item.id === todo.id ? { ...item, done: item.done?false:true } : item
+    );
+    this.todolist.set(updatedList);
+  }
+
+
+  addtodo(todoitem: Todomodal) {
     if (typeof window !== 'undefined' && localStorage) {
-      let oldlist = JSON.parse(localStorage.getItem('todolist') ?? '[]');
-      this.todolist.set(oldlist);
+      this.todolist.set([...this.todolist(), todoitem]);
     }
   }
 
-  addtodo(todoitem: any) {
+  deletetodo(todoitem:Todomodal){
+    const updatedList = this.todolist().filter(item =>item.id!=todoitem.id);
+    this.todolist.set(updatedList);
+  }
+
+  constructor() {
     if (typeof window !== 'undefined' && localStorage) {
-      this.todolist.set([...this.todolist(), todoitem]);
-      localStorage.setItem('todolist', JSON.stringify(this.todolist()));
-      console.log(this.todolist());
+      let oldlist: Todomodal[] = JSON.parse(localStorage.getItem('todolist') ?? '[]');
+      this.todolist.set(oldlist);
     }
+
+    effect(() => {
+      if (typeof window !== 'undefined' && localStorage) {
+        console.log("effect called")
+        localStorage.setItem('todolist', JSON.stringify(this.todolist()));
+      }
+    });
   }
 }
