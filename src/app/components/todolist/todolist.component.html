@@ -45,7 +45,6 @@
           appearance="outlined"
           class="todoitem"
           *ngFor="let todo of filteredPendingTodos"
-          [@todoAnimation]
           [ngClass]="{'high-priority': todo.priority === 'high', 'due-today': getTaskDueStatus(todo.enddate) === 'today', 'overdue': getTaskDueStatus(todo.enddate) === 'overdue'}"
         >
           <div
@@ -100,7 +99,6 @@
           appearance="outlined"
           class="todoitem completed"
           *ngFor="let todo of donetodolist"
-          [@todoAnimation]
         >
           <div class="todo-content">
             <div class="todoval">{{ todo.val }}</div>

@@ -1,4 +1,4 @@
-import { Component,ChangeDetectionStrategy } from '@angular/core';
+import { Component,ChangeDetectionStrategy, effect } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
@@ -9,6 +9,7 @@ import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import { TodomanagerService } from '../../services/todomanager.service';
 import { Todomodal } from '../../modals';
+import { AppservicesService } from '../../services/appservices.service';
 
 @Component({
   selector: 'app-addtodo',
@@ -16,19 +17,19 @@ import { Todomodal } from '../../modals';
   imports: [ MatDatepickerModule, MatFormFieldModule,MatSelectModule, MatInputModule, FormsModule, MatButtonModule, MatIconModule],
   templateUrl: './addtodo.component.html',
   styleUrl: './addtodo.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddtodoComponent {
   todoText = '';
   todoendDate=new Date();
   todopriority:'low'|'med'|'high' ='low';
+  isaddtodoshown=false;
 
-   constructor(private todoservice: TodomanagerService){
+   constructor(private todoservice: TodomanagerService, private appservices:AppservicesService){
 
+     effect(()=>{
+      this.isaddtodoshown=appservices.isaddtodoshown();
+    })
   }
-
-
-  // Property 'picker' does not exist on type 'AddtodoComponent'.ngtsc(2339) addtodo.component.ts(12, 8): Error occurs in the template of component AddtodoComponent.
 
   addtodo(){
     let newtodo:Todomodal = {

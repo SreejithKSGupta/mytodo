@@ -1,3 +1,4 @@
+@if (this.isaddtodoshown) {
 <div class="form-container">
   <div class="form-input">
     <input class="todofield" matInput type="text" [(ngModel)]="todoText" placeholder="Add Todo" title="add todo">
@@ -15,3 +16,4 @@
     <button mat-flat-button (click)="addtodo()" id="sbmtbtn" title="Add todo"><mat-icon>add</mat-icon></button>
   </div>
 </div>
+}

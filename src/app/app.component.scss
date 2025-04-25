@@ -16,3 +16,31 @@ html {
   --card-color:rgb(29, 29, 29);
   --txtcolor:white;
 }
+
+
+#FABbtn{
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  bottom: 20px;
+  right: 20px;
+  width: 80px;
+  height: 80px;
+  color: white;
+  background-color: blue;
+  border-radius: 20px;
+  cursor: pointer;
+}
+// .mat-icon{
+//   font-size: 60px;
+//   font-weight: bold;
+//   color: white;
+// }
+#FABbtn:hover{
+  scale:1.1;
+  transform: rotate(360);
+  font-size: 105%;
+
+}
