@@ -22,10 +22,13 @@ export class AddtodoComponent {
   todoText = '';
   todoendDate=new Date();
   todopriority:'low'|'med'|'high' ='low';
+
    constructor(private todoservice: TodomanagerService){
 
   }
 
+
+  // Property 'picker' does not exist on type 'AddtodoComponent'.ngtsc(2339) addtodo.component.ts(12, 8): Error occurs in the template of component AddtodoComponent.
 
   addtodo(){
     let newtodo:Todomodal = {

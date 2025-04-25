@@ -1,36 +1,17 @@
-<div id="formbox">
-<div class="formiptbox">
-<div class="row1">
-<mat-form-field id="todotxtipt">
-  <mat-label>Add Todo</mat-label>
-  <input matInput type="text" [(ngModel)]="todoText" title="add todo" placeholder="add todo">
-  @if (todoText) {
-    <button matSuffix mat-icon-button aria-label="Clear" (click)="todoText=''">
-      <mat-icon>close</mat-icon>
-    </button>
-  }
-</mat-form-field>
-</div>
-
-<div class="row2">
-<mat-form-field  id="tododateipt">
-  <mat-label>end date</mat-label>
-  <input matInput [matDatepicker]="picker" [(ngModel)]="todoendDate" title="select end date">
-  <mat-hint>MM/DD/YYYY</mat-hint>
-  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker></mat-datepicker>
-</mat-form-field>
-
-<mat-form-field  id="todoimpipt">
-  <mat-label>Priority</mat-label>
-  <mat-select [(ngModel)]="todopriority">
-    <mat-option value="low">Low</mat-option>
-    <mat-option value="med">Medium</mat-option>
-    <mat-option value="high">High</mat-option>
-  </mat-select>
-</mat-form-field>
-
-<button mat-flat-button (click)="addtodo()" id="sbmtbtn">Add</button>
-</div>
-</div>
+<div class="form-container">
+  <div class="form-input">
+    <input class="todofield" matInput type="text" [(ngModel)]="todoText" placeholder="Add Todo" title="add todo">
+    <!-- <input matInput [matDatepicker]="picker" [(ngModel)]="todoendDate" title="Select end date" placeholder="End Date"> -->
+     <div id="datepickermodule">
+      <input matInput [matDatepicker]="picker" [(ngModel)]="todoendDate" title="Select end date">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </div>
+    <mat-select [(ngModel)]="todopriority" placeholder="Priority">
+      <mat-option value="low">Low</mat-option>
+      <mat-option value="med">Medium</mat-option>
+      <mat-option value="high">High</mat-option>
+    </mat-select>
+    <button mat-flat-button (click)="addtodo()" id="sbmtbtn" title="Add todo"><mat-icon>add</mat-icon></button>
+  </div>
 </div>
