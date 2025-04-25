@@ -1,43 +1,130 @@
-<div id="todolist">
-  <div id="pendinglist">
-    <h2>Pending</h2>
-    @for (todo of notdonetodolist; track todo.id) {
-    <mat-card appearance="outlined" class="todoitem">
-      <div
-      class="priority"
-      [ngStyle]="{ 'background-color': prioritycolor[todo.priority] }"
-    >
+<div class="todo-dashboard">
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="stat-value">{{stats().totalTasks}}</div>
+      <div class="stat-label">Total Tasks</div>
     </div>
-      <div class="todoval">{{ todo.val }}</div>
-      <div class="enddate">
-        {{ todo.enddate | date : "shortDate" }}
-      </div>
-      <mat-icon class="mat-18" (click)="deletetodo(todo)">delete</mat-icon>
-      <mat-icon class="tododone" (click)="checkitem(todo)">task_alt</mat-icon>
-    </mat-card>
-    }
+    <div class="stat-card">
+      <div class="stat-value">{{stats().completedTasks}}</div>
+      <div class="stat-label">Completed</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">{{stats().highPriorityTasks}}</div>
+      <div class="stat-label">High Priority</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">{{stats().upcomingDeadlines}}</div>
+      <div class="stat-label">Due Soon</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">{{stats().completionRate}}%</div>
+      <div class="stat-label">Completion</div>
+    </div>
   </div>
 
-  <div id="donelist">
-    <h2>Completed</h2>
-    @for (todo of donetodolist; track todo.id) {
 
-    <mat-card appearance="outlined" class="todoitem">
-    <!-- <div
-      class="priority"
-      [ngStyle]="{ 'background-color': prioritycolor[todo.priority] }"
-    >
-    </div> -->
+  <!-- Main Todo Lists -->
+  <div id="todolist">
+    <div id="pendinglist">
+      <h2>
+        Pending
+        <span class="task-count" *ngIf="filteredPendingTodos.length > 0">
+          ({{filteredPendingTodos.length}})
+        </span>
+      </h2>
 
-      <div class="todoval">{{ todo.val }}</div>
-      <div class="enddate">
-        {{ todo.enddate | date : "shortDate" }}
+      <!-- Empty state -->
+      <div class="empty-state" *ngIf="filteredPendingTodos.length === 0">
+        <mat-icon>task</mat-icon>
+        <p>No pending tasks found</p>
       </div>
-      <mat-icon class="mat-18" (click)="deletetodo(todo)">delete</mat-icon>
-      <mat-icon class="tododone mat-18" (click)="checkitem(todo)"
-        >undo</mat-icon
-      >
-    </mat-card>
-    }
+
+      <!-- Pending Tasks List -->
+      <div class="tasks-container">
+        <mat-card
+          appearance="outlined"
+          class="todoitem"
+          *ngFor="let todo of filteredPendingTodos"
+          [@todoAnimation]
+          [ngClass]="{'high-priority': todo.priority === 'high', 'due-today': getTaskDueStatus(todo.enddate) === 'today', 'overdue': getTaskDueStatus(todo.enddate) === 'overdue'}"
+        >
+          <div
+            class="priority"
+            [ngStyle]="{ 'background-color': prioritycolor[todo.priority] }"
+            [matTooltip]="priorityLabels[todo.priority]"
+          ></div>
+
+          <div class="todo-content">
+            <div class="todoval">{{ todo.val }}</div>
+
+            <div class="todo-meta">
+              <div class="enddate" [ngClass]="getTaskDueStatus(todo.enddate)">
+                <mat-icon class="due-icon">event</mat-icon>
+                {{ todo.enddate | date : "MMM d" }}
+                <span class="due-label" *ngIf="getTaskDueStatus(todo.enddate) === 'today'">Today</span>
+                <span class="due-label" *ngIf="getTaskDueStatus(todo.enddate) === 'tomorrow'">Tomorrow</span>
+                <span class="due-label" *ngIf="getTaskDueStatus(todo.enddate) === 'overdue'">Overdue</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="todo-actions">
+            <button mat-icon-button color="warn" (click)="deletetodo(todo)" matTooltip="Delete">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="checkitem(todo)" matTooltip="Mark as complete">
+              <mat-icon class="tododone">task_alt</mat-icon>
+            </button>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+
+    <div id="donelist">
+      <h2>
+        Completed
+        <span class="task-count" *ngIf="donetodolist.length > 0">
+          ({{donetodolist.length}})
+        </span>
+      </h2>
+
+      <!-- Empty state -->
+      <div class="empty-state" *ngIf="donetodolist.length === 0">
+        <mat-icon>done_all</mat-icon>
+        <p>No completed tasks yet</p>
+      </div>
+
+      <!-- Completed Tasks List -->
+      <div class="tasks-container">
+        <mat-card
+          appearance="outlined"
+          class="todoitem completed"
+          *ngFor="let todo of donetodolist"
+          [@todoAnimation]
+        >
+          <div class="todo-content">
+            <div class="todoval">{{ todo.val }}</div>
+            <div class="todo-meta">
+              <div class="enddate">
+                <mat-icon class="due-icon">event</mat-icon>
+                {{ todo.enddate | date : "MMM d" }}
+                <span class="completed-date">
+                  Completed: {{ todo.completedAt | date : "shortDate" }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="todo-actions">
+            <button mat-icon-button color="warn" (click)="deletetodo(todo)" matTooltip="Delete">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button (click)="checkitem(todo)" matTooltip="Mark as pending">
+              <mat-icon class="tododone">undo</mat-icon>
+            </button>
+          </div>
+        </mat-card>
+      </div>
+    </div>
   </div>
 </div>

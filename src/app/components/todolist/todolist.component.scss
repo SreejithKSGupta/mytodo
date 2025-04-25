@@ -1,140 +1,261 @@
+// Variables
+$primary-color: #3f51b5;
+$primary-light: #111111;
+$accent-color: #ff4081;
+$warn-color: #f44336;
+$success-color: #4caf50;
+$text-color: #ffffff;
+$text-light: #afafaf;
+$border-radius: 8px;
+$shadow-light: 0 1px 3px rgba(0, 0, 0, 0.12);
+$shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1);
+$transition-quick: 0.2s ease;
+
+// General
+.todo-dashboard {
+  font-family: 'Roboto', sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+// Statistics Bar
+.stats-bar {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+
+  .stat-card {
+    background-color: white;
+    border-radius: $border-radius;
+    padding: 16px;
+    flex: 1;
+    min-width: 100px;
+    text-align: center;
+    box-shadow: $shadow-light;
+    transition: transform $transition-quick;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: $shadow-medium;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: 500;
+      color: $primary-color;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: $text-light;
+      margin-top: 4px;
+    }
+  }
+}
+
+
+// Todo Lists
 #todolist {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  font-family: 'Roboto', sans-serif;
   gap: 24px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 16px;
+
+  #donelist, #pendinglist {
+    flex: 1;
+    min-width: 300px;
+    border-radius: $border-radius;
+    background-color: #242424;
+    padding: 16px;
+    box-shadow: $shadow-light;
+    overflow: scroll;
+
+
+    h2 {
+      text-align: center;
+      margin-bottom: 16px;
+      color: $text-color;
+      font-weight: 500;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e0e0e0;
+
+      .task-count {
+        font-size: 16px;
+        color: $text-light;
+        font-weight: normal;
+      }
+    }
+
+    .tasks-container {
+      max-height: 65vh;
+      overflow-y: auto;
+      padding: 4px;
+    }
+  }
 }
 
-#donelist, #pendinglist {
-  flex: 1;
-  min-width: 300px;
-  height: 70vh;
-  overflow-y: auto;
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-}
-
-#pendinglist h2, #donelist h2 {
-  text-align: center;
-  margin-bottom: 16px;
-  color: #ffffff;
-  font-weight: 500;
-  padding-bottom: 8px;
-  border-bottom: 2px solid #e0e0e0;
-}
-
+// Todo Items
 .todoitem {
   display: flex;
-  margin: 12px 0;
   flex-direction: row;
-  justify-content: space-between;
+  margin: 12px 0;
   padding: 12px 16px;
-  width: 100%;
-  color: #424242;
+  border-radius: $border-radius;
+  background-color: $primary-light;
+  box-shadow: $shadow-light;
+  transition: transform $transition-quick, box-shadow $transition-quick;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-medium;
+  }
+
+  .priority {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 12px;
+    align-self: center;
+  }
+
+  .todo-content {
+    flex: 1;
+    padding-right: 8px;
+
+    .todoval {
+      font-size: 16px;
+      color: $text-color;
+      margin-bottom: 4px;
+      word-break: break-word;
+    }
+
+    .todo-meta {
+      display: flex;
+      align-items: center;
+
+      .enddate {
+        font-size: 14px;
+        color: $text-light;
+        display: flex;
+        align-items: center;
+
+        .due-icon {
+          font-size: 16px;
+          height: 16px;
+          width: 16px;
+          margin-right: 4px;
+        }
+
+        .due-label {
+          margin-left: 8px;
+          padding: 2px 6px;
+          border-radius: 4px;
+          font-size: 12px;
+        }
+      }
+
+      .completed-date {
+        margin-left: 8px;
+        font-size: 12px;
+        color: $text-light;
+        font-style: italic;
+      }
+    }
+  }
+
+  .todo-actions {
+    display: flex;
+    align-items: center;
+  }
+
+  // Todo item states
+  &.high-priority {
+    border-left: 4px solid $warn-color;
+  }
+
+  &.due-today {
+    background-color: $primary-light;
+
+    .enddate .due-label {
+      background-color: $primary-color;
+      color: white;
+    }
+  }
+
+  &.overdue {
+    border-left: 4px solid $warn-color;
+
+    .enddate {
+      color: $warn-color;
+
+      .due-label {
+        background-color: $warn-color;
+        color: white;
+      }
+    }
+  }
+
+  &.completed {
+    opacity: 0.8;
+
+    .todoval {
+      text-decoration: line-through;
+      color: $text-light;
+    }
+  }
+}
+// Empty state
+.empty-state {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-  transition: transform 0.2s, box-shadow 0.2s;
+  padding: 32px 16px;
+  color: $text-light;
+
+  mat-icon {
+    font-size: 48px;
+    height: 48px;
+    width: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
+
+  p {
+    margin-bottom: 16px;
+    font-size: 16px;
+  }
 }
 
-.todoitem:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+// Due status classes
+.today { color: $primary-color; }
+.overdue { color: $warn-color; }
+.tomorrow { color: $accent-color; }
+.upcoming { color: #ff9800; }
+.future { color: $text-light; }
 
-#pendinglist .todoitem {
-  border-left: 4px solid transparent;
-}
-
-.tododone {
-  cursor: pointer;
-  color: #4caf50;
-  transition: transform 0.2s;
-}
-
-.tododone:hover {
-  transform: scale(1.2);
-}
-
-mat-icon {
-  cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 0.2s, color 0.2s;
-}
-
-mat-icon:hover {
-  opacity: 1;
-}
-
-mat-icon.mat-18 {
-  color: #f44336;
-}
-
-.todoval {
-  text-align: left;
-  width: 60%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 16px;
-}
-
-#donelist .todoval {
-  text-decoration: line-through;
-  color: #9e9e9e;
-}
-
-.enddate {
-  width: 15%;
-  color: #757575;
-  font-size: 14px;
-}
-
-.priority {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  margin-right: 12px;
-}
-
-/* Priority color classes - easier to read with more distinct colors */
-.priority-high {
-  background-color: #f44336;
-}
-
-.priority-medium {
-  background-color: #ff9800;
-}
-
-.priority-low {
-  background-color: #4caf50;
-}
-
-/* Responsive adjustments */
+// Responsive
 @media (max-width: 768px) {
   #todolist {
     flex-direction: column;
   }
 
-  #donelist, #pendinglist {
-    width: 100%;
-    height: auto;
-    max-height: 50vh;
+  .todo-controls {
+    flex-direction: column;
+    align-items: stretch;
+
+    .search-filter {
+      flex-direction: column;
+    }
   }
-}
 
-/* Animation for new items */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+  .add-todo-form .form-row {
+    flex-direction: column;
+  }
 
-.todoitem-new {
-  animation: fadeIn 0.5s ease;
+  .stats-bar {
+    .stat-card {
+      min-width: calc(33% - 16px);
+    }
+  }
 }

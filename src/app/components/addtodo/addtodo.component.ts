@@ -32,12 +32,14 @@ export class AddtodoComponent {
 
   addtodo(){
     let newtodo:Todomodal = {
-      id:new Date(),
+      id: new Date(),
       val: this.todoText,
       date: new Date(),
-      enddate:this.todoendDate,
-      done:false,
-      priority:this.todopriority
+      enddate: this.todoendDate,
+      done: false,
+      priority: this.todopriority,
+      createdAt: new Date(),
+      completedAt: undefined
     }
     this.todoservice.addtodo(newtodo);
   }
