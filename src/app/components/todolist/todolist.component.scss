@@ -1,0 +1,39 @@
+#todolist{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#donelist, #pendinglist{
+  width: 50%;
+  height: 56vh;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todoitem{
+  display: flex;
+  margin: 10px;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px 5px;
+  width: 80%;
+  color: black;
+}
+
+.todoval{
+  text-align: left;
+  overflow:hidden;
+}
+
+.enddate{
+  width: 20%;
+}
+
+.priority{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}

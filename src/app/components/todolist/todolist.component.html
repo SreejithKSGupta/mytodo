@@ -1,1 +1,34 @@
+<div id="todolist">
+  <div id="pendinglist">
 
+@for (todo of notdonetodolist; track $index) {
+  <mat-card appearance="outlined" class="todoitem">
+    <mat-checkbox class="tododone"></mat-checkbox>
+    <div class="todoval">{{ todo.val }}</div>
+    <div class="enddate">
+      {{ todo.enddate }}
+    </div>
+    <div class="priority">
+      {{ todo.priority }}
+    </div>
+  </mat-card>
+}
+</div>
+
+  <div id="donelist">
+    @for (todo of donetodolist; track $index) {
+
+    <mat-card appearance="outlined" class="todoitem">
+      <mat-checkbox class="tododone"></mat-checkbox>
+      <div class="todoval">{{ todo.val }}</div>
+      <div class="enddate">
+        {{ todo.enddate.day }}
+      </div>
+      <div class="priority" >
+        hello
+      </div>
+    </mat-card>
+  }
+</div>
+
+</div>
