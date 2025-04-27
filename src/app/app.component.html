@@ -1,4 +1,7 @@
 <app-header></app-header>
 <app-todobody></app-todobody>
 <app-footer></app-footer>
-<div id="FABbtn" (click)="toggleaddtodo()"><mat-icon>{{appservices.isaddtodoshown()?'add':'close'}}</mat-icon></div>
+<div id="FABbtn" class="fab-button" (click)="toggleaddtodo()">
+  <mat-icon>{{ appservices.isaddtodoshown() ? 'close' : 'add' }}</mat-icon>
+  <span>{{ appservices.isaddtodoshown() ? 'Close' : 'Add' }}</span>
+</div>
