@@ -1,23 +1,18 @@
-// General
-.todo-dashboard {
-  font-family: 'Roboto', sans-serif;
-  width: clamp(300px, 70vw,1400px);
-  margin: 0 auto;
-  padding: 24px;
-}
+
 
 // Todo Lists
 #todolist {
   display: flex;
   flex-direction: row;
-  gap: 24px;
+  height: 70vh;
 
   #donelist, #pendinglist {
     flex: 1;
     min-width: 300px;
-    background-color: #242424;
     padding: 16px;
+    height: 95%;
     overflow: scroll;
+    margin: 0px 10px;
 
 
     h2 {

@@ -3,7 +3,7 @@
 
   <!-- Main Todo Lists -->
   <div id="todolist">
-    <div id="pendinglist">
+    <mat-card id="pendinglist">
       <h2>
         Pending
         <span class="task-count" *ngIf="filteredPendingTodos.length > 0">
@@ -55,9 +55,9 @@
           </div>
         </mat-card>
       </div>
-    </div>
+    </mat-card>
 
-    <div id="donelist">
+    <mat-card id="donelist">
       <h2>
         Completed
         <span class="task-count" *ngIf="donetodolist.length > 0">
@@ -101,6 +101,6 @@
           </div>
         </mat-card>
       </div>
-    </div>
+    </mat-card>
   </div>
 </div>
