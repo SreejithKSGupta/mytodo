@@ -1,19 +1,71 @@
-@if (this.isaddtodoshown) {
-<div class="form-container">
+<div class="form-container" role="dialog" aria-labelledby="todo-form-title">
   <div class="form-input">
-    <input class="todofield" matInput type="text" [(ngModel)]="todoText" placeholder="Add Todo" title="add todo">
-    <!-- <input matInput [matDatepicker]="picker" [(ngModel)]="todoendDate" title="Select end date" placeholder="End Date"> -->
-     <div id="datepickermodule">
-      <input matInput [matDatepicker]="picker" [(ngModel)]="todoendDate" title="Select end date">
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <h2  id="todo-form-title">Add New Task</h2>
+
+    <input
+      class="todofield"
+      matInput
+      type="text"
+      [(ngModel)]="todoText"
+      placeholder="What needs to be done?"
+      title="Add todo"
+      aria-label="Task description"
+      autocomplete="off"
+    />
+
+    <div class="row">
+
+    <div id="datepickermodule">
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [(ngModel)]="todoendDate"
+        placeholder="Due date"
+        title="Select due date"
+        aria-label="Due date"
+      />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+        aria-label="Open date picker"
+      ></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </div>
-    <mat-select [(ngModel)]="todopriority" placeholder="Priority">
+
+    <mat-select
+      [(ngModel)]="todopriority"
+      placeholder="Select priority"
+      aria-label="Task priority"
+    >
       <mat-option value="low">Low</mat-option>
       <mat-option value="med">Medium</mat-option>
       <mat-option value="high">High</mat-option>
     </mat-select>
-    <button mat-flat-button (click)="addtodo()" id="sbmtbtn" title="Add todo"><mat-icon>add</mat-icon></button>
+  </div>
+  <div class="row">
+    <button
+      mat-flat-button
+      type="submit"
+      (click)="addtodo()"
+      id="sbmtbtn"
+      title="Add todo"
+      aria-label="Save task"
+    >
+      <mat-icon aria-hidden="true">add_task</mat-icon>
+      <span>Add Task</span>
+    </button>
+
+    <button
+      mat-flat-button
+      type="reset"
+      (click)="cancel()"
+      id="cclbtn"
+      title="Cancel"
+      aria-label="Cancel adding task"
+    >
+      <mat-icon aria-hidden="true">close</mat-icon>
+      <span>Cancel</span>
+    </button>
+  </div>
   </div>
 </div>
-}

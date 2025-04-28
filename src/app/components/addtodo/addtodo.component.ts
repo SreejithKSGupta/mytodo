@@ -1,4 +1,5 @@
-import { Component,ChangeDetectionStrategy, effect } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Component } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
@@ -9,7 +10,6 @@ import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import { TodomanagerService } from '../../services/todomanager.service';
 import { Todomodal } from '../../modals';
-import { AppservicesService } from '../../services/appservices.service';
 
 @Component({
   selector: 'app-addtodo',
@@ -24,11 +24,7 @@ export class AddtodoComponent {
   todopriority:'low'|'med'|'high' ='low';
   isaddtodoshown=false;
 
-   constructor(private todoservice: TodomanagerService, private appservices:AppservicesService){
-
-     effect(()=>{
-      this.isaddtodoshown=appservices.isaddtodoshown();
-    })
+   constructor(private todoservice: TodomanagerService, private MatDialogref: MatDialogRef<AddtodoComponent>){
   }
 
   addtodo(){
@@ -43,5 +39,10 @@ export class AddtodoComponent {
       completedAt: undefined
     }
     this.todoservice.addtodo(newtodo);
+  }
+
+  cancel(){
+    //close the dialog
+    this.MatDialogref.close();
   }
 }
