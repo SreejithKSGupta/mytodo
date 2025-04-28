@@ -1,4 +1,46 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Dancing+Script:wght@400..700&family=Jersey+15&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lora:ital,wght@0,400..700;1,400..700&family=Oswald:wght@200..700&family=Pacifico&family=Barriecito&family=Lilita+One&family=Permanent+Marker&family=Press+Start+2P&display=swap');
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+html {
+  color-scheme: light;
+  @include mat.theme((
+    color: mat.$violet-palette,
+    typography: Roboto,
+    density: 0
+  ));
+}
+
+body.dark-mode {
+  color-scheme: dark;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  margin: 0;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-size: 3rem;
+  font-weight: bolder;
+  text-transform: uppercase;
+  text-align: center;
+  font-family: Oswald;
+  margin-top: 2vh;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}

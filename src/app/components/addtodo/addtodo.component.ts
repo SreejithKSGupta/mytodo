@@ -28,6 +28,14 @@ export class AddtodoComponent {
   }
 
   addtodo(){
+    if(this.todoText.trim()==''){
+      alert('Add Some Todo');
+      return
+    }
+    else if (this.todoendDate< new Date()){
+      alert(' Choose a future Date');
+      return;
+    }
     let newtodo:Todomodal = {
       id: new Date(),
       val: this.todoText,
@@ -38,7 +46,11 @@ export class AddtodoComponent {
       createdAt: new Date(),
       completedAt: undefined
     }
+    this.todoText=''
+    this.todoendDate=new Date();
+    this.todopriority='low'
     this.todoservice.addtodo(newtodo);
+
   }
 
   cancel(){

@@ -1,4 +1,9 @@
 <div id="header" class="row">
+  <div class="row">
   <img src="/logo.svg" alt="logo">
   <div id="headertext">My todo</div>
+</div>
+<div class="themebox">
+  <mat-slide-toggle [(ngModel)]="thememode" (change)="toggletheme()">{{thememode?'dark':'light'}}</mat-slide-toggle>
+  </div>
 </div>

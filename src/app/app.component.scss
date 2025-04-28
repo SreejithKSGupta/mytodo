@@ -1,29 +1,8 @@
-@use '@angular/material' as mat;
-
-html {
-  color-scheme:  dark;
-  @include mat.theme((
-    color: mat.$violet-palette,
-    typography: Roboto,
-    density: 0
-  ));
-}
-
-:root{
-  --pcolor:red;
-  --bdrad:10px;
-  --bgcolor:rgb(15, 15, 15);
-  --card-color:rgb(29, 29, 29);
-  --txtcolor:white;
-}
-
-
 #FABbtn {
   position: fixed;
   bottom: 20px;
   right: 20px;
   color:white;
   width: 10vw;
-  background-color: blue;
 }
 
