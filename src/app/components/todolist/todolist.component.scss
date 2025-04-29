@@ -4,6 +4,7 @@
 #todolist {
   display: flex;
   flex-direction: row;
+  min-height: 65vh;
 
   #donelist, #pendinglist {
     flex: 1;
