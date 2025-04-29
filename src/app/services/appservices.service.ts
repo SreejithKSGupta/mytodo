@@ -1,41 +1,26 @@
-import { Injectable, signal, effect, Signal } from '@angular/core';
+import { Injectable, signal, effect } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AppservicesService  {
 
-  isdarkmode :signal<any>;
+export class AppservicesService {
+  isdarkmode = signal(
+    typeof window !== 'undefined' &&
+      document.body.classList.contains('dark-mode')
+  );
 
   constructor() {
-    if (typeof window != 'undefined') {
-      const themeMode = localStorage.getItem('thememode') ?? '"dark-theme"';
-      this.isdarkmode = signal(themeMode);
-    }
-    else{
-      this.isdarkmode=signal(false);
-    }
     effect(() => {
       if (typeof window != 'undefined') {
-        localStorage.setItem('thememode', JSON.stringify(this.isdarkmode()));
+        let themeMode = this.isdarkmode() ? 'dark-mode' : 'light-mode';
+        localStorage.setItem('thememode', themeMode);
         if (this.isdarkmode()) {
           document.body.classList.add('dark-mode');
         } else {
           document.body.classList.remove('dark-mode');
         }
-        console.log('theme set :', this.isdarkmode());
       }
     });
   }
-
-  // ngOnInit() {
-  //   this.setthemeonload();
-  // }
-
-  // setthemeonload() {
-  //   if (typeof window != 'undefined') {
-  //     const themeMode = localStorage.getItem('thememode') ?? '"dark-theme"';
-  //     this.isdarkmode.set(JSON.parse(themeMode));
-  //   }
-  // }
 }

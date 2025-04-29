@@ -35,7 +35,6 @@ export class TodomanagerService {
 
     effect(() => {
       if (typeof window !== 'undefined' && localStorage) {
-        console.log("effect called")
         localStorage.setItem('todolist', JSON.stringify(this.todolist()));
       }
     });

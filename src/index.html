@@ -20,8 +20,15 @@
       width: 0px;
     }
   </style>
+
 </head>
 <body class="mat-typography">
   <app-root></app-root>
 </body>
+<script>
+  if(typeof window != 'undefined'){
+        const themeMode = localStorage.getItem('thememode') ?? 'dark-mode';
+        document.body.classList.add(themeMode);
+  }
+</script>
 </html>
