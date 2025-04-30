@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddtodoComponent } from './addtodo.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 describe('AddtodoComponent', () => {
   let component: AddtodoComponent;
@@ -8,7 +9,10 @@ describe('AddtodoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddtodoComponent]
+      imports: [AddtodoComponent],
+      providers: [
+        { provide: MatDialogRef, useValue: {} }
+      ]
     })
     .compileComponents();
 

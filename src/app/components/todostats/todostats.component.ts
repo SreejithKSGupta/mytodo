@@ -72,7 +72,7 @@ export class TodostatsComponent {
 
       this.notdonetodolist = allTodos.filter((item) => !item.done);
       this.donetodolist = allTodos.filter((item) => item.done);
-      this.applyFilters();
+      // this.applyFilters();
 
       this.updateStats(allTodos);
     });
@@ -105,22 +105,22 @@ export class TodostatsComponent {
     });
   }
 
-  applyFilters() {
-    this.filteredPendingTodos = this.notdonetodolist.filter(todo => {
-      // Apply priority filter
-      const priorityMatch = this.selectedPriority === 'all' || todo.priority === this.selectedPriority;
+  // applyFilters() {
+  //   this.filteredPendingTodos = this.notdonetodolist.filter(todo => {
+  //     // Apply priority filter
+  //     const priorityMatch = this.selectedPriority === 'all' || todo.priority === this.selectedPriority;
 
-    });
-  }
-
-
+  //   });
+  // }
 
 
 
-  filterByPriority(priority: string) {
-    this.selectedPriority = priority;
-    this.applyFilters();
-  }
+
+
+  // filterByPriority(priority: string) {
+  //   this.selectedPriority = priority;
+  //   // this.applyFilters();
+  // }
 
 
 }

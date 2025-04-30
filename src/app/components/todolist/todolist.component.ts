@@ -1,4 +1,4 @@
-import { Component, effect, signal } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import { TodomanagerService } from '../../services/todomanager.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';

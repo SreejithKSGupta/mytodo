@@ -1,4 +1,4 @@
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {  MatDialogRef } from '@angular/material/dialog';
 import { Component } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
@@ -36,7 +36,7 @@ export class AddtodoComponent {
       alert(' Choose a future Date');
       return;
     }
-    let newtodo:Todomodal = {
+    const newtodo:Todomodal = {
       id: new Date(),
       val: this.todoText,
       date: new Date(),

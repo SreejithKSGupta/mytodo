@@ -29,7 +29,7 @@ export class TodomanagerService {
 
   constructor() {
     if (typeof window !== 'undefined' && localStorage) {
-      let oldlist: Todomodal[] = JSON.parse(localStorage.getItem('todolist') ?? '[]');
+      const oldlist: Todomodal[] = JSON.parse(localStorage.getItem('todolist') ?? '[]');
       this.todolist.set(oldlist);
     }
 

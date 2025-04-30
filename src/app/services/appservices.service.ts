@@ -13,7 +13,7 @@ export class AppservicesService {
   constructor() {
     effect(() => {
       if (typeof window != 'undefined') {
-        let themeMode = this.isdarkmode() ? 'dark-mode' : 'light-mode';
+        const themeMode = this.isdarkmode() ? 'dark-mode' : 'light-mode';
         localStorage.setItem('thememode', themeMode);
         if (this.isdarkmode()) {
           document.body.classList.add('dark-mode');
